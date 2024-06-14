@@ -44,8 +44,7 @@ function App() {
         });
         resetTurn();
       } else {
-        console.log("Not Match");
-        resetTurn();
+        setTimeout(() => resetTurn(), 1000);
       }
     }
   }, [choiceOne, choiceTwo]);
@@ -59,12 +58,16 @@ function App() {
   return (
     <div className="App">
       <h1>Magic Match</h1>
-      <p>{turns}</p>
       <button onClick={shuffleCards}>New Game</button>
 
       <div className="card-grid">
         {cards.map((card) => (
-          <SingleCard card={card} handleChoice={handleChoice} key={card.id} />
+          <SingleCard
+            card={card}
+            handleChoice={handleChoice}
+            key={card.id}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+          />
         ))}
       </div>
     </div>
